@@ -1,6 +1,5 @@
 {% extends "admin/base.html" %}
 {% load static %}
-
 {% block extrahead %}
     {{ block.super }}
     <script src="{% static 'admin/js/jquery.js' %}"></script>
@@ -23,9 +22,9 @@
                     <h2>Site administration</h2>
                     <ul class="messagelist">
                         {% for message in messages %}
-                            <li{% if message.tags %} class="{{ message.tags }}">{% endif %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
                                 <span class="title">{{ message.level|capfirst }}</span>
-                                {{ message }}
+                                {{ message.message }}
                             </li>
                         {% endfor %}
                     </ul>
@@ -36,16 +35,16 @@
 
     <div class="colMS" role="main">
         <div class="app-{{ app_name }} module">
-            <h1>Django administration</h1>
+            <h1>Адміністрування Django</h1>
             <table>
                 <tr>
                     <td>
-                        <h2>Site administration</h2>
+                        <h2>Адміністрування сайту</h2>
                     </td>
                     <td style="text-align:right; padding-right:10px;">
                         <span class="user-tools">
                             <a href="{% url 'admin:solar_hosting_contactmessage_changelist' %}?read__exact=0">
-                                Unread Messages (<span id="unread_count">0</span>)
+                                Непрочитані повідомлення <span id="unread_count"></span>
                             </a>
                         </span>
                     </td>

@@ -38,6 +38,21 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script>
+        $(document).ready(function() {
+            // Назначаем обработчик клика для элемента, который вызывает выпадающее меню
+            $('.navbar-toggle').click(function() {
+                // Переключаем состояние меню
+                $('.navbar-collapse').toggleClass('in');
+            });
+
+            // Назначаем обработчик клика для элементов меню
+            $('.navbar-nav li a').click(function() {
+                // Закрываем меню после клика на пункте меню
+                $('.navbar-collapse').removeClass('in');
+            });
+        });
+    </script>
 </head>
 <body class="host_version">
 <!-- Modal -->

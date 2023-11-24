@@ -4,13 +4,21 @@
 {{ block.super }} {# Подключите другие CSS-файлы, если необходимо #}
 <link rel="stylesheet" type="text/css" href="{% static 'solar_hosting/css/error_messages.css' %}">
 {% endblock %}
-
 {% block content %}
-{% if not user.is_authenticated %}
-    <div class="alert alert-warning" role="alert">
-        Для можливості здійснювати покупки, увійдіть до системи або <a href="#" data-toggle="modal" data-target="#login">зареєструйтесь</a>.
-    </div>
-{% endif %}
+<!--{% if not user.is_authenticated %}-->
+<!--    <div class="alert alert-warning" role="alert">-->
+<!--        Для можливості здійснювати покупки, увійдіть до системи або <a href="#" data-toggle="modal" data-target="#login">зареєструйтесь</a>.-->
+<!--    </div>-->
+<!--{% endif %}-->
+<!--{% if messages %}-->
+<!--<div class="messages">-->
+<!--    <ul>-->
+<!--        {% for message in messages %}-->
+<!--        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>-->
+<!--        {% endfor %}-->
+<!--    </ul>-->
+<!--</div>-->
+<!--{% endif %}-->
 {% if messages %}
 <div class="error-messages">
     <ul>
@@ -18,6 +26,12 @@
         <li>{{ message }}</li>
         {% endfor %}
     </ul>
+</div>
+{% endif %}
+{% if not user.is_authenticated %}
+<!-- Блок с сообщением для незарегистрированных пользователей -->
+<div class="alert alert-warning" role="alert" id="purchaseWarning" style="display: none;">
+    Для можливості здійснення покупок, <a href="#" data-toggle="modal" data-target="#login">Увійдіть</a> або <a href="#" data-toggle="modal" data-target="#login">Зареєструйтесь</a>.
 </div>
 {% endif %}
 <div id="home" class="first-section" style="background-image: url('uploads/slider-03-new.jpg');">
@@ -157,8 +171,20 @@
                             <label class="sr-only" for="domainnamehere">Доменне ім'я</label>
                             <input type="text" class="form-control" id="domainnamehere" name="domain_name"
                                    placeholder="Введіть доменне ім'я тут для покупки...">
-                            <button type="submit" class="btn btn-primary grd1"><i class="fa fa-search"></i></button>
+                            <button type="submit" class="btn btn-primary grd1" onclick="showMessage(event)"><i
+                                    class="fa fa-search"></i></button>
                         </div>
+                        <div class="alert alert-warning" role="alert" id="purchaseMessage" style="display: none;">
+                            Для можливості здійснення покупок, <a href="#" data-toggle="modal" data-target="#login">Увійдіть</a>
+                            або <a href="#" data-toggle="modal" data-target="#login">Зареєструйтесь</a>.
+                        </div>
+                        <script>
+                            function showMessage(event) {
+                                event.preventDefault();  // Остановка отправки формы
+                                var purchaseMessage = document.getElementById('purchaseMessage');
+                                purchaseMessage.style.display = 'block';
+                            }
+                        </script>
                         <hr>
                         <div class="clearfix"></div>
                         <div class="checkbox checkbox-warning">
@@ -222,8 +248,7 @@
 
                     <hr>
 
-                    <a href="{% url 'solar_hosting:purchase' %}" data-scroll
-                       class="btn btn-light grd1 effect-1 btn-radius btn-brd">Замовити зараз</a>
+                    <a href="#" data-scroll class="btn btn-light grd1 effect-1 btn-radius btn-brd" id="purchaseButton1">Замовити зараз</a>
 
                 </div><!--widget -->
             </div><!-- end col -->
@@ -256,8 +281,7 @@
                     </div>
                     <hr>
 
-                    <a href="{% url 'solar_hosting:purchase' %}" data-scroll
-                       class="btn btn-light grd1 effect-1 btn-radius btn-brd">Замовити зараз</a>
+                    <a href="#" data-scroll class="btn btn-light grd1 effect-1 btn-radius btn-brd" id="purchaseButton2">Замовити зараз</a>
 
                 </div><!--widget -->
             </div><!-- end col -->
@@ -292,8 +316,7 @@
                     </div>
                     <hr>
 
-                    <a href="{% url 'solar_hosting:purchase' %}" data-scroll
-                       class="btn btn-light grd1 effect-1 btn-radius btn-brd">Замовити зараз</a>
+                    <a href="#" data-scroll class="btn btn-light grd1 effect-1 btn-radius btn-brd" id="purchaseButton3">Замовити зараз</a>
 
                 </div><!--widget -->
             </div><!-- end col -->
@@ -372,8 +395,7 @@
                                         </p>
                                     </div>
                                     <div class="pricing-table-sign-up">
-                                        <a href="{% url 'solar_hosting:purchase' %}" data-scroll
-                                           class="btn btn-light btn-radius btn-brd grd1 effect-1">Замовити зараз</a>
+                                        <a href="#" data-scroll class="btn btn-light grd1 effect-1 btn-radius btn-brd" id="purchaseButton4">Замовити зараз</a>
                                     </div>
                                 </div>
                             </div>
@@ -397,8 +419,7 @@
                                         </p>
                                     </div>
                                     <div class="pricing-table-sign-up">
-                                        <a href="{% url 'solar_hosting:purchase' %}" data-scroll
-                                           class="btn btn-light btn-radius btn-brd grd1 effect-1">Замовити зараз</a>
+                                        <a href="#" data-scroll class="btn btn-light grd1 effect-1 btn-radius btn-brd" id="purchaseButton5">Замовити зараз</a>
                                     </div>
                                 </div>
                             </div>
@@ -420,8 +441,7 @@
                                         </p>
                                     </div>
                                     <div class="pricing-table-sign-up">
-                                        <a href="{% url 'solar_hosting:purchase' %}" data-scroll
-                                           class="btn btn-light btn-radius btn-brd grd1 effect-1">Замовити зараз</a>
+                                        <a href="#" data-scroll class="btn btn-light grd1 effect-1 btn-radius btn-brd" id="purchaseButton6">Замовити зараз</a>
                                     </div>
                                 </div>
                             </div>
@@ -447,8 +467,7 @@
                                         </p>
                                     </div>
                                     <div class="pricing-table-sign-up">
-                                        <a href="{% url 'solar_hosting:purchase' %}" data-scroll
-                                           class="btn btn-light btn-radius btn-brd grd1 effect-1">Замовити зараз</a>
+                                        <a href="#" data-scroll class="btn btn-light grd1 effect-1 btn-radius btn-brd" id="purchaseButton7">Замовити зараз</a>
                                     </div>
                                 </div>
                             </div>
@@ -472,8 +491,7 @@
                                         </p>
                                     </div>
                                     <div class="pricing-table-sign-up">
-                                        <a href="{% url 'solar_hosting:purchase' %}" data-scroll
-                                           class="btn btn-light btn-radius btn-brd grd1 effect-1">Замовити зара</a>
+                                        <a href="#" data-scroll class="btn btn-light grd1 effect-1 btn-radius btn-brd" id="purchaseButton8">Замовити зараз</a>
                                     </div>
                                 </div>
                             </div>
@@ -484,146 +502,18 @@
         </div><!-- end row -->
     </div><!-- end container -->
 </div><!-- end section -->
+<script>
+    // JavaScript для отображения сообщения при нажатии на кнопку
+    for (let i = 1; i <= 8; i++) {
+        document.getElementById(`purchaseButton${i}`).addEventListener('click', showPurchaseWarning);
+    }
 
-<!--    <div id="overviews" class="section wb">-->
-<!--    <div class="container">-->
-<!--        <div class="section-title row text-center">-->
-<!--            <div class="col-md-8 col-md-offset-2">-->
-<!--                <h3>Про нас</h3>-->
-<!--                <p class="lead">Solar Hosting - це компанія, яка прагне зробити сонячний хостинг доступним для всіх.-->
-<!--                    Ми віримо в силу сонця як безмежного джерела енергії і пропонуємо інноваційні рішення для вашого-->
-<!--                    веб-хостингу.</p>-->
-<!--            </div>-->
-<!--        </div>&lt;!&ndash; end title &ndash;&gt;-->
+    function showPurchaseWarning() {
+        var purchaseWarning = document.getElementById('purchaseWarning');
+        if (purchaseWarning) {
+            purchaseWarning.style.display = 'block';
+        }
+    }
+</script>
 
-<!--        <div class="row">-->
-<!--            <div class="col-md-6">-->
-<!--                <div class="message-box">-->
-<!--                    <h4>КРАЩА ВЕБ-ХОСТИНГОВА КОМПАНІЯ 2023 РОКУ</h4>-->
-<!--                    <h2>Центр підтримки переможців нагород</h2>-->
-<!--                    <p class="lead">Висока продуктивність: Наша інфраструктура базується на сучасних технологіях,-->
-<!--                        що забезпечують високу продуктивність та швидкість завантаження сторінок вашого сайту.</p>-->
-
-<!--                    <p> Відповідальність перед середовищем: Використовуючи сонячну енергію,-->
-<!--                        ми допомагаємо зменшити викиди вуглецю та сприяємо збереженню природних ресурсів. </p>-->
-
-<!--&lt;!&ndash;                    <a href="#services" data-scroll class="btn btn-light btn-radius btn-brd grd1 effect-1">Learn&ndash;&gt;-->
-<!--&lt;!&ndash;                        More</a>&ndash;&gt;-->
-<!--                </div>&lt;!&ndash; end messagebox &ndash;&gt;-->
-<!--            </div>&lt;!&ndash; end col &ndash;&gt;-->
-
-<!--            <div class="col-md-6">-->
-<!--                <div class="post-media wow fadeIn">-->
-<!--                    <img alt="img" class="img-responsive img-rounded" src="/uploads/about_02.jpg">-->
-<!--                    <a class="playbutton" data-rel="prettyPhoto[gal]" href="https://www.youtube.com/watch?v=qjk6z-xvdH4"><i-->
-<!--                            class="flaticon-play-button"></i></a>-->
-<!--                </div>&lt;!&ndash; end media &ndash;&gt;-->
-<!--            </div>&lt;!&ndash; end col &ndash;&gt;-->
-<!--        </div>&lt;!&ndash; end row &ndash;&gt;-->
-
-<!--        <hr class="invis">-->
-
-<!--        <div class="row">-->
-<!--            <div class="col-md-4 col-sm-6 col-xs-12">-->
-<!--                <div class="icon-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">-->
-<!--                    <i class="flaticon-server global-radius effect-1 alignleft"></i>-->
-<!--                    <h3>Необмежена пропускна здатність</h3>-->
-<!--                    <p>Ми гарантуємо необмежену пропускну здатність для вашого веб-сайту!</p>-->
-<!--                </div>&lt;!&ndash; end icon-wrapper &ndash;&gt;-->
-<!--            </div>&lt;!&ndash; end col &ndash;&gt;-->
-
-<!--            <div class="col-md-4 col-sm-6 col-xs-12">-->
-<!--                <div class="icon-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s">-->
-<!--                    <i class="flaticon-cloud-computing-1 global-radius effect-1 alignleft"></i>-->
-<!--                    <h3>Необмежений трафік</h3>-->
-<!--                    <p>Ви не обмежені обсягом трафіку – ростьте та розвивайте свій веб-проект необмежено!</p>-->
-<!--                </div>&lt;!&ndash; end icon-wrapper &ndash;&gt;-->
-<!--            </div>&lt;!&ndash; end col &ndash;&gt;-->
-
-<!--            <div class="col-md-4 col-sm-6 col-xs-12">-->
-<!--                <div class="icon-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">-->
-<!--                    <i class="flaticon-world-wide-web global-radius effect-1 alignleft"></i>-->
-<!--                    <h3>Один Домен Безкоштовно</h3>-->
-<!--                    <p>Ви отримуєте можливість зареєструвати один домен абсолютно безкоштовно!</p>-->
-<!--                </div>&lt;!&ndash; end icon-wrapper &ndash;&gt;-->
-<!--            </div>&lt;!&ndash; end col &ndash;&gt;-->
-<!--        </div>&lt;!&ndash; end row &ndash;&gt;-->
-
-<!--        <hr class="hr3">-->
-
-<!--        <div class="row">-->
-<!--            <div class="col-md-4 col-sm-6 col-xs-12">-->
-<!--                <div class="icon-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">-->
-<!--                    <i class="flaticon-cup global-radius effect-1 alignleft"></i>-->
-<!--                    <h3>Підтримка переможців</h3>-->
-<!--                    <p>Ми надаємо підтримку переможцям нагород і робимо все можливе, щоб ваш сайт виглядав вражаюче та працював на високому рівні!</p>-->
-<!--                </div>&lt;!&ndash; end icon-wrapper &ndash;&gt;-->
-<!--            </div>&lt;!&ndash; end col &ndash;&gt;-->
-
-<!--            <div class="col-md-4 col-sm-6 col-xs-12">-->
-<!--                <div class="icon-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">-->
-<!--                    <i class="flaticon-cer-file-format global-radius effect-1 alignleft"></i>-->
-<!--                    <h3>Безкоштовний SSL сертифікат</h3>-->
-<!--                    <p>Отримуйте безкоштовний SSL-сертифікат і забезпечте захищене з'єднання для вашого сайту!</p>-->
-<!--                </div>&lt;!&ndash; end icon-wrapper &ndash;&gt;-->
-<!--            </div>&lt;!&ndash; end col &ndash;&gt;-->
-
-<!--            <div class="col-md-4 col-sm-6 col-xs-12">-->
-<!--                <div class="icon-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s">-->
-<!--                    <i class="flaticon-locked global-radius effect-1 alignleft"></i>-->
-<!--                    <h3>Високий рівень безпеки</h3>-->
-<!--                    <p>Ми гарантуємо високий рівень безпеки, захищаючи ваші дані та інформацію від потенційних загроз!<small class="readmore"><a href="#">Read more</a></small></p>-->
-<!--                </div>&lt;!&ndash; end icon-wrapper &ndash;&gt;-->
-<!--            </div>&lt;!&ndash; end col &ndash;&gt;-->
-<!--        </div>&lt;!&ndash; end row &ndash;&gt;-->
-<!--    </div>&lt;!&ndash; end container &ndash;&gt;-->
-<!--</div>&lt;!&ndash; end section &ndash;&gt;-->
-
-
-<!--<div id="support" class="section wb">-->
-<!--    <div class="container">-->
-<!--        <div class="section-title text-center">-->
-<!--            <h3>Need Help? Sure we are Online!</h3>-->
-<!--            <p class="lead">Let us give you more details about the special offer website you want us. Please fill out-->
-<!--                the form below. <br>We have million of website owners who happy to work with us!</p>-->
-<!--        </div>&lt;!&ndash; end title &ndash;&gt;-->
-
-<!--        <div class="row">-->
-<!--            <div class="col-md-12">-->
-<!--                <div class="contact_form">-->
-<!--                    <div id="message"></div>-->
-<!--                    <form id="contactform" class="row" action="contact.php" name="contactform" method="post">-->
-<!--                        <fieldset class="row-fluid">-->
-<!--                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
-<!--                                <input type="text" name="first_name" id="first_name" class="form-control"-->
-<!--                                       placeholder="First Name">-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
-<!--                                <input type="text" name="last_name" id="last_name" class="form-control"-->
-<!--                                       placeholder="Last Name">-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
-<!--                                <input type="email" name="email" id="email" class="form-control"-->
-<!--                                       placeholder="Your Email">-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
-<!--                                <input type="text" name="phone" id="phone" class="form-control"-->
-<!--                                       placeholder="Your Phone">-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
-<!--                                <textarea class="form-control" name="comments" id="comments" rows="6"-->
-<!--                                          placeholder="Give us more details.."></textarea>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">-->
-<!--                                <button type="submit" value="SEND" id="submit"-->
-<!--                                        class="btn btn-light btn-radius btn-brd grd1 btn-block">Get a Quote-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                        </fieldset>-->
-<!--                    </form>-->
-<!--                </div>-->
-<!--            </div>&lt;!&ndash; end col &ndash;&gt;-->
-<!--        </div>&lt;!&ndash; end row &ndash;&gt;-->
-<!--    </div>&lt;!&ndash; end container &ndash;&gt;-->
-<!--</div>&lt;!&ndash; end section &ndash;&gt;-->
 {% endblock %}

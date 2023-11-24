@@ -69,7 +69,7 @@ def login_view(request):
             login(request, user)
             return redirect('solar_hosting:dashboard')
         else:
-            messages.error(request, 'Неправильное имя пользователя или пароль. Попробуйте ещё раз.')
+            messages.error(request, "Неправильне ім'я користувача або пароль. Спробуйте ще раз.")
             # Вы можете добавить другую обработку ошибки, если необходимо
     return redirect('solar_hosting:main')  # Перенаправляем на главную страницу после неудачного входа
 
@@ -138,8 +138,8 @@ def change_settings(request):
                 if name_form.is_valid():
                     name_form.save()  # Сохранить данные имени и фамилии
                     request.user.refresh_from_db()  # Обновить данные пользователя из базы данных
-                    logger.info('Личные данные обновлены успешно.')
-                    messages.success(request, 'Личные данные обновлены успешно.')
+                    logger.info('Особисті дані успішно оновлено.')
+                    messages.success(request, 'Особисті дані оновлено успішно.')
 
             elif action == 'email':
                 email_form = EmailChangeForm(request.POST)
@@ -147,8 +147,8 @@ def change_settings(request):
                     new_email = email_form.cleaned_data['email']
                     request.user.email = new_email
                     request.user.save()
-                    logger.info('Email успешно изменен.')
-                    messages.success(request, 'Email успешно изменен.')
+                    logger.info('Email успішно змінено.')
+                    messages.success(request, 'Email успішно змінено.')
 
             elif action == 'phone':
                 phone_form = PhoneChangeForm(request.POST)
@@ -156,19 +156,19 @@ def change_settings(request):
                     new_phone = phone_form.cleaned_data['phone']
                     request.user.phone = new_phone
                     request.user.save()
-                    logger.info('Телефон успешно изменен.')
-                    messages.success(request, 'Телефон успешно изменен.')
+                    logger.info('Телефон успішно змінено.')
+                    messages.success(request, 'Телефон успішно змінено.')
 
             elif action == 'password':
                 password_form = PasswordChangeForm(request.user, request.POST)
                 if password_form.is_valid():
                     user = password_form.save()
                     update_session_auth_hash(request, user)
-                    logger.info('Пароль успешно изменен.')
-                    messages.success(request, 'Пароль успешно изменен.')
+                    logger.info('Пароль успішно змінено.')
+                    messages.success(request, 'Пароль успішно змінено.')
         except Exception as e:
-            logger.error(f'Произошла ошибка: {e}')
-            messages.error(request, 'Произошла ошибка. Пожалуйста, попробуйте снова.')
+            logger.error(f'Виникла помилка: {e}')
+            messages.error(request, 'Виникла помилка. Будь ласка, спробуйте ще раз.')
 
     return render(request, 'solar_hosting/settings.html', {
         'profile_form': profile_form,
