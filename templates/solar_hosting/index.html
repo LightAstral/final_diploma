@@ -6,6 +6,11 @@
 {% endblock %}
 
 {% block content %}
+{% if not user.is_authenticated %}
+    <div class="alert alert-warning" role="alert">
+        Для можливості здійснювати покупки, увійдіть до системи або <a href="#" data-toggle="modal" data-target="#login">зареєструйтесь</a>.
+    </div>
+{% endif %}
 {% if messages %}
 <div class="error-messages">
     <ul>

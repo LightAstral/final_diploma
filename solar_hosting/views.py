@@ -179,6 +179,7 @@ def change_settings(request):
     })
 
 
+@login_required(login_url='solar_hosting:login')
 def purchase(request):
     if request.method == 'POST':
         form = HostingPurchaseForm(request.POST)
@@ -218,7 +219,7 @@ def purchase_history(request):
     })
 
 
-@login_required
+@login_required(login_url='solar_hosting:login')
 def purchase_domain(request):
     if request.method == 'POST':
         form = DomainPurchaseForm(request.POST)
