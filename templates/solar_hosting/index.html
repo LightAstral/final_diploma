@@ -502,17 +502,40 @@
         </div><!-- end row -->
     </div><!-- end container -->
 </div><!-- end section -->
+<!--<script>-->
+<!--    // JavaScript для отображения сообщения при нажатии на кнопку-->
+<!--    for (let i = 1; i <= 8; i++) {-->
+<!--        document.getElementById(`purchaseButton${i}`).addEventListener('click', showPurchaseWarning);-->
+<!--    }-->
+
+<!--    function showPurchaseWarning() {-->
+<!--        var purchaseWarning = document.getElementById('purchaseWarning');-->
+<!--        if (purchaseWarning) {-->
+<!--            purchaseWarning.style.display = 'block';-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
 <script>
     // JavaScript для отображения сообщения при нажатии на кнопку
     for (let i = 1; i <= 8; i++) {
         document.getElementById(`purchaseButton${i}`).addEventListener('click', showPurchaseWarning);
     }
 
-    function showPurchaseWarning() {
+    function showPurchaseWarning(event) {
+        event.preventDefault();  // Остановка действия по умолчанию (перехода по ссылке)
+
         var purchaseWarning = document.getElementById('purchaseWarning');
-        if (purchaseWarning) {
-            purchaseWarning.style.display = 'block';
-        }
+
+        // Добавим проверку на зарегистрированного пользователя
+        // Если пользователь зарегистрирован, перенаправим его на страницу покупки
+        // В противном случае отобразим предупреждение
+        {% if user.is_authenticated %}
+            window.location.href = "{% url 'solar_hosting:purchase' %}";
+        {% else %}
+            if (purchaseWarning) {
+                purchaseWarning.style.display = 'block';
+            }
+        {% endif %}
     }
 </script>
 
