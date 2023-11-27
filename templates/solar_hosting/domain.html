@@ -20,7 +20,7 @@
     <div class="container">
         <div class="section-title row text-center">
             <div class="col-md-12">
-<!--                <h3>Домен</h3>-->
+                <!--                <h3>Домен</h3>-->
                 <p class="lead">Ми пропонуємо своїм клієнтам швидко і зручно зареєструвати доменне ім'я. За допомогою
                     нашої ви можете зареєструвати домени в найбільш популярних зонах: .ua, .com, .net, .org, .info,
                     .biz, і багатьох інших. Реєстрація доменного імені буде здійснюватися виключно відповідно
@@ -68,8 +68,16 @@
                             <label class="sr-only" for="domainnamehere">Доменне ім'я</label>
                             <input type="text" class="form-control" id="domainnamehere" name="domain_name"
                                    placeholder="Введіть доменне ім'я тут для покупки...">
-                            <button type="submit" class="btn btn-primary grd1"><i class="fa fa-search"></i></button>
+                            <button id="purchaseButton" type="button" class="btn btn-primary grd1" onclick="showPurchaseWarning(event, purchaseUrl)">
+                                <i class="fa fa-search"></i>
+                            </button>
                         </div>
+                        {% if not user.is_authenticated %}
+                        <!-- Блок с сообщением для незарегистрированных пользователей -->
+                        <div class="alert alert-warning" role="alert" id="purchaseWarning" style="display: none;">
+                            Для возможности совершения покупок, <a href="#" data-toggle="modal" data-target="#login">войдите</a> или <a href="#" data-toggle="modal" data-target="#login">зарегистрируйтесь</a>.
+                        </div>
+                        {% endif %}
                         <hr>
                         <div class="clearfix"></div>
                         <div class="checkbox checkbox-warning">
@@ -179,149 +187,4 @@
     </div><!-- end container -->
 </div><!-- end section -->
 
-<!--<div id="testimonials" class="parallax section db parallax-off"-->
-<!--     style="background-image:url({% static 'uploads/parallax_04.jpg' %});">-->
-<!--    <div class="container">-->
-<!--        <div class section-title text-center-->
-<!--        ">-->
-<!--        <h3>Testimonials</h3>-->
-<!--        <p class="lead">We thanks for all our awesome testimonials! There are hundreds of our happy customers! <br>Let's-->
-<!--            see what others say about Landigoo website template!</p>-->
-<!--    </div>&lt;!&ndash; end title &ndash;&gt;-->
-<!--    <div class="row">-->
-<!--        <div class="col-md-12 col-sm-12">-->
-<!--            <div class="testi-carousel owl-carousel owl-theme">-->
-<!--                <div class="testimonial clearfix">-->
-<!--                    <div class="desc">-->
-<!--                        <h3><i class="fa fa-quote-left"></i> Wonderful Support!</h3>-->
-<!--                        <p class="lead">They have got my project on time with the competition with a sed highly skilled,-->
-<!--                            and experienced & professional team.</p>-->
-<!--                    </div>-->
-<!--                    <div class="testi-meta">-->
-<!--                        <img src="/uploads/testi_01.png" alt="" class="img-responsive alignleft">-->
-<!--                        <h4>James Fernando <small>- Manager of Racer</small></h4>-->
-<!--                    </div>&lt;!&ndash; end testi-meta &ndash;&gt;-->
-<!--                </div>&lt;!&ndash; end testimonial &ndash;&gt;-->
-
-<!--                <div class="testimonial clearfix">-->
-<!--                    <div class="desc">-->
-<!--                        <h3><i class="fa fa-quote-left"></i> Awesome Services!</h3>-->
-<!--                        <p class="lead">Explain to you how all this mistaken idea of denouncing pleasure and praising-->
-<!--                            pain was born and I will give you completed.</p>-->
-<!--                    </div>-->
-<!--                    <div class="testi-meta">-->
-<!--                        <img src="/uploads/testi_02.png" alt="" class="img-responsive alignleft">-->
-<!--                        <h4>Jacques Philips <small>- Designer</small></h4>-->
-<!--                    </div>&lt;!&ndash; end testi-meta &ndash;&gt;-->
-<!--                </div>&lt;!&ndash; end testimonial &ndash;&gt;-->
-
-<!--                <div class="testimonial clearfix">-->
-<!--                    <div class="desc">-->
-<!--                        <h3><i class="fa fa-quote-left"></i> Great & Talented Team!</h3>-->
-<!--                        <p class="lead">The master-builder of human happines no one rejects, dislikes avoids pleasure-->
-<!--                            itself, because it is very pursue pleasure.</p>-->
-<!--                    </div>-->
-<!--                    <div class="testi-meta">-->
-<!--                        <img src="/uploads/testi_03.png" alt="" class="img-responsive alignleft">-->
-<!--                        <h4>Venanda Mercy <small>- Newyork City</small></h4>-->
-<!--                    </div>&lt;!&ndash; end testi-meta &ndash;&gt;-->
-<!--                </div>&lt;!&ndash; end testimonial &ndash;&gt;-->
-
-<!--                <div class="testimonial clearfix">-->
-<!--                    <div class="desc">-->
-<!--                        <h3><i class="fa fa-quote-left"></i> Wonderful Support!</h3>-->
-<!--                        <p class="lead">They have got my project on time with the competition with a sed highly skilled,-->
-<!--                            and experienced & professional team.</p>-->
-<!--                    </div>-->
-<!--                    <div class="testi-meta">-->
-<!--                        <img src="/uploads/testi_01.png" alt="" class="img-responsive alignleft">-->
-<!--                        <h4>James Fernando <small>- Manager of Racer</small></h4>-->
-<!--                    </div>&lt;!&ndash; end testi-meta &ndash;&gt;-->
-<!--                </div>&lt;!&ndash; end testimonial &ndash;&gt;-->
-
-<!--                <div class="testimonial clearfix">-->
-<!--                    <div class="desc">-->
-<!--                        <h3><i class="fa fa-quote-left"></i> Great & Talented Team!</h3>-->
-<!--                        <p class="lead">The master-builder of human happines no one rejects, dislikes avoids pleasure-->
-<!--                            itself, because it is very pursue pleasure. </p>-->
-<!--                    </div>-->
-<!--                    <div class="testi-meta">-->
-<!--                        <img src="/uploads/testi_03.png" alt="" class="img-responsive alignleft">-->
-<!--                        <h4>Venanda Mercy <small>- Newyork City</small></h4>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; end testi-meta &ndash;&gt;-->
-<!--                </div>&lt;!&ndash; end testimonial &ndash;&gt;-->
-<!--            </div>&lt;!&ndash; end carousel &ndash;&gt;-->
-<!--        </div>&lt;!&ndash; end col &ndash;&gt;-->
-<!--    </div>&lt;!&ndash; end row &ndash;&gt;-->
-<!--</div>&lt;!&ndash; end container &ndash;&gt;-->
-<!--</div>&lt;!&ndash; end section &ndash;&gt;-->
-
-<!--<div id="support" class="section wb">-->
-<!--    <div class="container">-->
-<!--        <div class="section-title text-center">-->
-<!--            <h3>Need Help? Sure we are Online!</h3>-->
-<!--            <p class="lead">Let us give you more details about the special offer website you want us. Please fill out-->
-<!--                the form below. <br>We have million of website owners who happy to work with us!</p>-->
-<!--        </div>&lt;!&ndash; end title &ndash;&gt;-->
-
-<!--        <div class="row">-->
-<!--            <div class="col-md-12">-->
-<!--                <div class="contact_form">-->
-<!--                    <div id="message"></div>-->
-<!--                    <form id="contactform" class="row" action="contact.php" name="contactform" method="post">-->
-<!--                        <fieldset class="row-fluid">-->
-<!--                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
-<!--                                <input type="text" name="first_name" id="first_name" class="form-control"-->
-<!--                                       placeholder="First Name">-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
-<!--                                <input type="text" name="last_name" id="last_name" class="form-control"-->
-<!--                                       placeholder="Last Name">-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
-<!--                                <input type="email" name="email" id="email" class="form-control"-->
-<!--                                       placeholder="Your Email">-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
-<!--                                <input type="text" name="phone" id="phone" class="form-control"-->
-<!--                                       placeholder="Your Phone">-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
-<!--                                <label class="sr-only">Select Service</label>-->
-<!--                                <select name="select_service" id="select_service" class="selectpicker form-control"-->
-<!--                                        data-style="btn-white">-->
-<!--                                    <option value="12">Select Package</option>-->
-<!--                                    <option value="Web Design">Web Hosting</option>-->
-<!--                                    <option value="Web Development">Shared Hosting</option>-->
-<!--                                    <option value="Graphic Design">Reseller Hosting</option>-->
-<!--                                    <option value="Others">Others</option>-->
-<!--                                </select>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
-<!--                                <label class="sr-only">Select Country</label>-->
-<!--                                <select name="select_price" id="select_price" class="selectpicker form-control"-->
-<!--                                        data-style="btn-white">-->
-<!--                                    <option value="India">India</option>-->
-<!--                                    <option value="Italy">Italy</option>-->
-<!--                                    <option value="Holland">Holland</option>-->
-<!--                                    <option value="Germany">Germany</option>-->
-<!--                                </select>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
-<!--                                <textarea class="form-control" name="comments" id="comments" rows="6"-->
-<!--                                          placeholder="Give us more details.."></textarea>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">-->
-<!--                                <button type="submit" value="SEND" id="submit"-->
-<!--                                        class="btn btn-light btn-radius btn-brd grd1 btn-block">Get a Quote-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                        </fieldset>-->
-<!--                    </form>-->
-<!--                </div>-->
-<!--            </div>&lt;!&ndash; end col &ndash;&gt;-->
-<!--        </div>&lt;!&ndash; end row &ndash;&gt;-->
-<!--    </div>&lt;!&ndash; end container &ndash;&gt;-->
-<!--</div>&lt;!&ndash; end section &ndash;&gt;-->
 {% endblock %}

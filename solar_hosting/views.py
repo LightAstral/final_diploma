@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 def index(request):
-    return render(request, 'solar_hosting/index.html')
+    return render(request, 'solar_hosting/index.html', {'user': request.user})
 
 
 def features(request):
@@ -24,7 +24,7 @@ def features(request):
 
 
 def domain(request):
-    return render(request, 'solar_hosting/domain.html')
+    return render(request, 'solar_hosting/domain.html', {'user': request.user})
 
 
 def hosting(request):

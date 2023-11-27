@@ -14,7 +14,7 @@
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- Site Metas -->
-    <title>HostCloud - Responsive HTML5 Template</title>
+    <title>Solar Hosting</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -38,6 +38,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!--    <script src="{% static 'solar_hosting/js/main.js' %}"></script>-->
+{% block extra_scripts %}
+    {{ block.super }} {# Подключите другие скрипты, если необходимо #}
+    <!-- Передача URL из Django в JavaScript -->
+    <script>
+        var purchaseUrl = "{% url 'solar_hosting:purchase_domain' %}";
+    </script>
+    <!-- Подключение вашего файла main.js -->
+    <script src="{% static 'solar_hosting/js/main.js' %}"></script>
+{% endblock %}
     <script>
         $(document).ready(function() {
             // Назначаем обработчик клика для элемента, который вызывает выпадающее меню

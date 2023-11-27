@@ -5,20 +5,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'solar_hosting/css/error_messages.css' %}">
 {% endblock %}
 {% block content %}
-<!--{% if not user.is_authenticated %}-->
-<!--    <div class="alert alert-warning" role="alert">-->
-<!--        Для можливості здійснювати покупки, увійдіть до системи або <a href="#" data-toggle="modal" data-target="#login">зареєструйтесь</a>.-->
-<!--    </div>-->
-<!--{% endif %}-->
-<!--{% if messages %}-->
-<!--<div class="messages">-->
-<!--    <ul>-->
-<!--        {% for message in messages %}-->
-<!--        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>-->
-<!--        {% endfor %}-->
-<!--    </ul>-->
-<!--</div>-->
-<!--{% endif %}-->
+
 {% if messages %}
 <div class="error-messages">
     <ul>
